@@ -50,6 +50,11 @@
             <artifactId>google-api-services-sheets</artifactId>
             <version>v4-rev493-1.23.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.ibm.icu</groupId>
+            <artifactId>icu4j</artifactId>
+            <version>61.1</version>
+        </dependency>
     </dependencies>
 
 </project>

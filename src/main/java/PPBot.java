@@ -1,6 +1,7 @@
 import Helper.Helper;
 import Helper.Helper.*;
 import objects.Ingradient;
+import objects.MenuForDayOfWeek;
 import objects.Recipe;
 import org.telegram.telegrambots.api.methods.send.SendMessage;
 import org.telegram.telegrambots.api.objects.Update;
@@ -12,16 +13,15 @@ import java.security.GeneralSecurityException;
 import java.time.LocalDate;
 import java.util.Calendar;
 
-import static Helper.Helper.BREAKFAST_RESIPE_LIST;
-import static Helper.Helper.MENU_FOR_WEEK;
+import static Helper.Helper.*;
 
 public class PPBot extends TelegramLongPollingBot {
+    public String COMMAND = "";
+    public SendMessage massage = new SendMessage();
 
     public void onUpdateReceived(Update update) {
-        String command=update.getMessage().getText();
-        SendMessage massage= new SendMessage();
-        if (command.equals("/MenuForCurrentWeek"))
-        {
+        COMMAND = update.getMessage().getText();
+        if (COMMAND.equals("Меню на текущую неделю")) {
             try {
                 SheetsAndJava.mains(Helper.getWeekNum());
             } catch (IOException e) {
@@ -29,10 +29,9 @@ public class PPBot extends TelegramLongPollingBot {
             } catch (GeneralSecurityException e) {
                 e.printStackTrace();
             }
-              massage.setText(MENU_FOR_WEEK.toString());
+            massage.setText(MENU_FOR_WEEK.toString());
         }
-        if (command.equals("/MenuForCurrentDate"))
-        {
+        if (COMMAND.equals("Меню на сегодня")) {
             try {
                 SheetsAndJava.mains(Helper.getWeekNum());
             } catch (IOException e) {
@@ -41,22 +40,21 @@ public class PPBot extends TelegramLongPollingBot {
                 e.printStackTrace();
             }
             if (MENU_FOR_WEEK.getMonday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().name()))
-                massage.setText(MENU_FOR_WEEK.getMonday().toString());
+                massage.setText(MENU_FOR_WEEK.getMonday().getDate() + "\n" + MENU_FOR_WEEK.getMonday().toString());
             if (MENU_FOR_WEEK.getTuesday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().name()))
-                massage.setText(MENU_FOR_WEEK.getTuesday().toString());
+                massage.setText(MENU_FOR_WEEK.getTuesday().getDate() + "\n" + MENU_FOR_WEEK.getTuesday().toString());
             if (MENU_FOR_WEEK.getWednesday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().name()))
-                massage.setText(MENU_FOR_WEEK.getWednesday().toString());
+                massage.setText(MENU_FOR_WEEK.getWednesday().getDate() + "\n" + MENU_FOR_WEEK.getWednesday().toString());
             if (MENU_FOR_WEEK.getThursday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().name()))
-                massage.setText(MENU_FOR_WEEK.getThursday().toString());
+                massage.setText(MENU_FOR_WEEK.getThursday().getDate() + "\n" + MENU_FOR_WEEK.getThursday().toString());
             if (MENU_FOR_WEEK.getFriday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().name()))
-                massage.setText(MENU_FOR_WEEK.getFriday().toString());
+                massage.setText(MENU_FOR_WEEK.getFriday().getDate() + "\n" + MENU_FOR_WEEK.getFriday().toString());
             if (MENU_FOR_WEEK.getSaturday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().name()))
-                massage.setText(MENU_FOR_WEEK.getSaturday().toString());
+                massage.setText(MENU_FOR_WEEK.getSaturday().getDate() + "\n" + MENU_FOR_WEEK.getSaturday().toString());
             if (MENU_FOR_WEEK.getSunday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().name()))
-                massage.setText(MENU_FOR_WEEK.getSunday().toString());
+                massage.setText(MENU_FOR_WEEK.getSunday().getDate() + "\n" + MENU_FOR_WEEK.getSunday().toString());
         }
-        if (command.equals("/MenuForNextDate"))
-        {
+        if (COMMAND.equals("Меню на завтра")) {
             try {
                 SheetsAndJava.mains(Helper.getWeekNum());
             } catch (IOException e) {
@@ -65,20 +63,39 @@ public class PPBot extends TelegramLongPollingBot {
                 e.printStackTrace();
             }
             if (MENU_FOR_WEEK.getMonday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().plus(1).name()))
-                massage.setText(MENU_FOR_WEEK.getMonday().toString());
+                massage.setText(MENU_FOR_WEEK.getMonday().getDate() + "\n" + MENU_FOR_WEEK.getMonday().toString());
             if (MENU_FOR_WEEK.getTuesday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().plus(1).name()))
-                massage.setText(MENU_FOR_WEEK.getTuesday().toString());
+                massage.setText(MENU_FOR_WEEK.getTuesday().getDate() + "\n" + MENU_FOR_WEEK.getTuesday().toString());
             if (MENU_FOR_WEEK.getWednesday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().plus(1).name()))
-                massage.setText(MENU_FOR_WEEK.getWednesday().toString());
+                massage.setText(MENU_FOR_WEEK.getWednesday().getDate() + "\n" + MENU_FOR_WEEK.getWednesday().toString());
             if (MENU_FOR_WEEK.getThursday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().plus(1).name()))
-                massage.setText(MENU_FOR_WEEK.getThursday().toString());
+                massage.setText(MENU_FOR_WEEK.getThursday().getDate() + "\n" + MENU_FOR_WEEK.getThursday().toString());
             if (MENU_FOR_WEEK.getFriday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().plus(1).name()))
-                massage.setText(MENU_FOR_WEEK.getFriday().toString());
+                massage.setText(MENU_FOR_WEEK.getFriday().getDate() + "\n" + MENU_FOR_WEEK.getFriday().toString());
             if (MENU_FOR_WEEK.getSaturday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().plus(1).name()))
-                massage.setText(MENU_FOR_WEEK.getSaturday().toString());
+                massage.setText(MENU_FOR_WEEK.getSaturday().getDate() + "\n" + MENU_FOR_WEEK.getSaturday().toString());
             if (MENU_FOR_WEEK.getSunday().getTypeOfDay().toString().equals(LocalDate.now().getDayOfWeek().plus(1).name()))
-                massage.setText(MENU_FOR_WEEK.getSunday().toString());
+                massage.setText(MENU_FOR_WEEK.getSunday().getDate() + "\n" + MENU_FOR_WEEK.getSunday().toString());
         }
+
+
+        for (Recipe itemRecipe : BREAKFAST_RESIPE_LIST) {
+            if (COMMAND.equals("/"+itemRecipe.latinName)) {
+                massage.setText(itemRecipe.toString());
+            }
+        }
+        for (Recipe itemRecipe : LUNCH_RESIPE_LIST) {
+            if (COMMAND.equals("/"+itemRecipe.latinName)) {
+                massage.setText(itemRecipe.toString());
+            }
+        }
+        for ( Recipe itemRecipe : DINNER_RESIPE_LIST) {
+            if (COMMAND.equals("/"+itemRecipe.getLatinName())) {
+                massage.setText(itemRecipe.toString());
+            }
+        }
+
+
         massage.setChatId(update.getMessage().getChatId());
         try {
             execute(massage);

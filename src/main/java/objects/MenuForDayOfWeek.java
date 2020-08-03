@@ -62,8 +62,8 @@ public class MenuForDayOfWeek {
 
     @Override
     public String toString() {
-        return  "Завтрак: " + Breackfast.getName() +"\n"+
-                "Обед: " + Lunch.getName() +"\n"+
-                "Ужин: " + Dinner.getName() +"\n";
+        return  "Завтрак: "+Breackfast.getName() +" /"+Breackfast.getLatinName() +"\n"+
+                "Обед: " + Lunch.getName()+" /"+Lunch.getLatinName() +"\n"+
+                "Ужин: " + Dinner.getName()+" /"+Dinner.getLatinName() +"\n";
     }
 }

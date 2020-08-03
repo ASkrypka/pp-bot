@@ -1,17 +1,15 @@
 package objects;
 
-import java.util.concurrent.ExecutionException;
-
 public class Ingradient {
     private int recipeId;
     private Foods foodItem;
     private String ingredientsValueKG;
     private String ingredientsValueLiter;
-    private String ingredientsValueUnit;
+    private String ingredientsItems;
     private String ingredientsValueSpoon;
     private String taste;
 
-    public Ingradient(int recipeId, Foods foodItem, String ingredientsValueKG, String ingredientsValueLiter, String ingredientsValueUnit, String ingredientsValueSpoon, String taste) {
+    public Ingradient(int recipeId, Foods foodItem, String ingredientsValueKG, String ingredientsValueLiter, String ingredientsItems, String ingredientsValueSpoon, String taste) {
         this.recipeId = recipeId;
         this.foodItem = foodItem;
         if (ingredientsValueKG != null) {
@@ -24,10 +22,10 @@ public class Ingradient {
         } else {
             this.ingredientsValueLiter = null;
         }
-        if (ingredientsValueUnit != null) {
-            this.ingredientsValueUnit = ingredientsValueUnit;
+        if (ingredientsItems != null) {
+            this.ingredientsItems = ingredientsItems;
         } else {
-            this.ingredientsValueUnit = null;
+            this.ingredientsItems = null;
         }
         if (ingredientsValueSpoon != null) {
             this.ingredientsValueSpoon = ingredientsValueSpoon;
@@ -41,7 +39,7 @@ public class Ingradient {
         }
         if (ingredientsValueKG==null
                 &&ingredientsValueLiter==null
-                &&ingredientsValueUnit==null
+                &&ingredientsItems==null
         &&ingredientsValueSpoon==null
         &&taste==null)
         {
@@ -81,12 +79,12 @@ public class Ingradient {
         this.ingredientsValueLiter = ingredientsValueLiter;
     }
 
-    public String getIngredientsValueUnit() {
-        return ingredientsValueUnit;
+    public String getIngredientsItems() {
+        return ingredientsItems;
     }
 
-    public void setIngredientsValueUnit(String ingredientsValueUnit) {
-        this.ingredientsValueUnit = ingredientsValueUnit;
+    public void setIngredientsItems(String ingredientsItems) {
+        this.ingredientsItems = ingredientsItems;
     }
 
     public String getIngredientsValueSpoon() {
@@ -106,4 +104,31 @@ public class Ingradient {
     }
 
 
+    @Override
+    public String toString() {
+        String returninfo="";
+        if (ingredientsValueKG!=null)
+        {
+            returninfo=returninfo+"\n\t"+foodItem.toString()+ingredientsValueKG+" г.";
+        }
+         if (ingredientsValueLiter!=null)
+        {
+            returninfo=returninfo+"\n\t"+foodItem.toString()+ingredientsValueLiter+" мл.";
+        }
+          if (ingredientsItems !=null)
+        {
+            returninfo=returninfo+"\n\t"+foodItem.toString()+ ingredientsItems +" штук.";
+        }
+        if (ingredientsValueSpoon !=null)
+        {
+            returninfo=returninfo+"\n\t"+foodItem.toString()+ ingredientsValueSpoon +" чайных ложек.";
+        }
+
+         if (taste!=null)
+        {
+            returninfo=returninfo+"\n\t"+foodItem.toString()+" по вкусу.";
+        }
+
+        return returninfo;
+    }
 }

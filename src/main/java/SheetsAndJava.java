@@ -16,15 +16,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static Helper.Helper.*;
-import static Helper.Helper.DayOfweek.*;
 
 public class SheetsAndJava {
     private static Sheets sheetsService;
@@ -91,7 +87,7 @@ public class SheetsAndJava {
             recipeTEXT = row.get(3).toString();
             dishFor = row.get(4).toString();
 
-            if (dishFor.equals(DishFor.BREAKFASK.toString())) {
+            if (dishFor.equals(DishFor.BREAKFAST.toString())) {
                 List<Ingradient> ingra = new ArrayList<>();
                 for (Ingradient ingrad : INGRADIENTS_LIST) {
                     if (ingrad.getRecipeId() == recipeId) {
@@ -158,11 +154,11 @@ public class SheetsAndJava {
                         foodForIngradits = foodItem;
                     }
                 }
-                ingredientsValueKG = row.get(2).toString();
-                ingredientsValueLiter = row.get(3).toString();
-                ingredientsValueUnit = row.get(4).toString();
-                ingredientsValueSpoon = row.get(5).toString();
-                taste = row.get(6).toString();
+                ingredientsValueKG = row.get(2).toString().equals("null")?null: row.get(2).toString();
+                ingredientsValueLiter = row.get(3).toString().equals("null")?null: row.get(3).toString();
+                ingredientsValueUnit =row.get(4).toString().equals("null")?null: row.get(4).toString();
+                ingredientsValueSpoon = row.get(5).toString().equals("null")?null: row.get(5).toString();
+                taste = row.get(6).toString().equals("null")?null: row.get(6).toString();
                 INGRADIENTS_LIST.add(new Ingradient(recipeId, foodForIngradits, ingredientsValueKG, ingredientsValueLiter, ingredientsValueUnit, ingredientsValueSpoon, taste));
             }
         }

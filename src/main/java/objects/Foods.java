@@ -68,11 +68,12 @@ public class Foods {
 
     @Override
     public String toString() {
-        return "Objects.Foods{" +
-                "foodId=" + foodId +
-                ", foodName='" + foodName + '\'' +
-                ", foodType='" + foodType + '\'' +
-                '}';
+        String returnData="";
+        if (foodType.equals("null"))
+            returnData =foodName+": ";
+        else
+        returnData= foodName + "("+foodType+"): ";
+        return returnData;
     }
 
 
